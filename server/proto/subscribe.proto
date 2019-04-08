@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package api;
+
+message SubscribeRequest {
+    string username = 1;
+    string publicKey = 2;
+    uint32 timeStamp = 3;
+}
+
+message SubscribeResponse {
+    bool status = 1;
+    string message = 2;
+}
+
+message AllowSubscribeMessage {
+    string ownerPublicKey = 1;
+    string memberPublicKey = 2;
+    uint32 timeStamp = 3;
+    Status status = 4;
+    enum Status {
+        Verify = 0;
+        Ignore = 2;
+    }
+}
+
+service SubscribeService {
+    rpc Receive (SubscribeRequest) returns (SubscribeResponse);
+    rpc Apply (AllowSubscribeMessage) returns (SubscribeResponse);
+}
+

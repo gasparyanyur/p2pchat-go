@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package api;
+
+message MessageRequest {
+    string message = 1;
+    string signature = 2;
+    string username = 3;
+    uint32 timestamp = 4;
+}
+
+message MessageResponse {
+    uint32 code = 1;
+}
+
+message Film {
+
+    extensions 50 to 99;
+
+}
+
+
+service ChatService {
+    rpc ReceiveMessage (MessageRequest) returns (MessageResponse);
+}
